@@ -1,4 +1,4 @@
-Django==2.2
+Django==2.2.8
 django-webpack-loader==0.6.0
 Pillow==6.2.1
 postgres==3.0.0
