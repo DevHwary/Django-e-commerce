@@ -139,12 +139,12 @@ class Basket(models.Model):
     def create_order(self, billing_address, shipping_address):
         if not self.user:
             raise exceptions.BasketException("Cannot create order without user")
-        logger.info(
-            "Creating order for basket_id=%d"
-            ", shipping_address_id=%d, billing_address_id=%d",
-            self.id,
-            shipping_address.id,
-            billing_address.id,
+            logger.info(
+                "Creating order for basket_id=%d"
+                ", shipping_address_id=%d, billing_address_id=%d",
+                self.id,
+                shipping_address.id,
+                billing_address.id,
             )
 
 

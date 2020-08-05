@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-     'rest_framework',      # REST framework
+    'rest_framework',      # REST framework
 
     'debug_toolbar',          # DEBUG debug_toolbar
     'django_tables2',       # tables
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #'webpack_loader',   # will not be used Fakes
 
     'django_extensions',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
@@ -64,7 +65,7 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 100
         }
-        
+
 # tables`
 DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap.html'
 

@@ -17,6 +17,8 @@ import django_filters
 from django_filters.views import FilterView
 
 
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -190,21 +192,27 @@ class AddressSelectionView(LoginRequiredMixin, FormView):
 
 
 ''' ---------------------------------------- Basket view --------------------------------'''
+# note : every request add_to_basket, creates a new basket, by using the middleware,
+    # it give the old basket id so it will not create new one. it is request.basket
 
+# 1. create basket, 2. create basket line using the basket id
 def add_to_basket(request):
+
 
     product = get_object_or_404(models.Product, pk=request.GET.get("product_id"))
     basket = request.basket
 
-    if not request.basket:
-        if request.user.is_authenticated:
+
+    # it is ok to be =>> if not basket:
+    if not request.basket:  # 1. if there No basket, will create. if there jump to step 2
+        if request.user.is_authenticated:   # put the user (user or none)
             user = request.user
         else:
             user = None
 
-        basket = models.Basket.objects.create(user=user)
-        request.session["basket_id"] = basket.id
-
+        basket = models.Basket.objects.create(user=user)    # finally create the basket anyway with user
+        request.session["basket_id"] = basket.id        # put the basked id to the session data
+    # 2. Get or Create basket Line, and put the basket id
     basketline, created = models.BasketLine.objects.get_or_create(basket=basket, product=product)
     if not created:
         basketline.quantity += 1
